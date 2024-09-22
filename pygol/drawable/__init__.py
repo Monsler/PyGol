@@ -125,3 +125,25 @@ class Circle(Drawable):
     def on_draw(self, canvas: pygame.Surface):
         if self.visible:
             pygame.draw.circle(canvas, self.color, (self.x, self.y), self.radius, self.width)
+
+class Text(Drawable):
+    def __init__(self, label, fontname, size, x=0, y=0, color=(0, 0, 0)) -> None:
+        self.x = x
+        self.y = y
+        self.text = label
+        self.color = color
+        self.font_name = fontname
+        self.font = pygame.font.SysFont(fontname, size)
+        self.label = self.font.render(self.text, False, self.color)
+        self.visible = True
+    
+    def get_size(self) -> int:
+        return self.font.size(self.text)
+
+    def set_text(self, text: str):
+        self.text = text
+        self.label = self.font.render(self.text, False, self.color)
+    
+    def on_draw(self, canvas: pygame.Surface):
+        if self.visible:
+            canvas.blit(self.label, (self.x, self.y))
