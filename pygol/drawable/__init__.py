@@ -44,6 +44,7 @@ class Rect(Drawable):
         self.visible = True
         self.instance = self.rect
         self._rounded = 0
+        self.angle = 0
 
     def set_round_value(self, value: int):
         self._rounded = value
@@ -55,8 +56,6 @@ class Rect(Drawable):
 
     def set_click_listener(self, listener):
         self.click_listener = listener
-
-
 
     def remove_self(self):
         if self in self.parent.drawments:
@@ -147,3 +146,37 @@ class Text(Drawable):
     def on_draw(self, canvas: pygame.Surface):
         if self.visible:
             canvas.blit(self.label, (self.x, self.y))
+
+class Group(Drawable):
+    def __init__(self, x: int=0, y: int=0, width: int=150, height: int=150) -> None:
+        self.width = width
+        self.height = height
+        self.canvas = pygame.Surface((width, height), pygame.SRCALPHA)
+        self._canvas = copy.copy(self.canvas)
+        self.x = x
+        self.y = y
+        self.angle = 0
+        self.drawments = []
+    
+    def insert(self, of: Drawable):
+        self.drawments.append(of)
+        of.on_draw(canvas=self.canvas)
+        self._canvas = copy.copy(self.canvas)
+        of.parent = self
+    
+    def repaint(self):
+         self._canvas = copy.copy(self.canvas)
+
+    def rotate(self, angle: float):
+        self.angle = angle
+        self.canvas = pygame.transform.rotate(self._canvas, self.angle)
+
+    def remove_self(self):
+        self.parent.drawments.remove(self)
+        del self
+
+    def on_draw(self, canvas: pygame.Surface):
+        canvas.blit(self.canvas, (self.x, self.y))
+        for elem in self.drawments:
+                elem.on_draw(canvas=self.canvas)
+            
