@@ -17,8 +17,9 @@ win.insert(text)
 
 #Update function
 def update():
-    text.x = (win.pygame_window.get_width()/2)-(text.get_size()[0]/2)
-    text.y = (win.pygame_window.get_height()/2)-(text.get_size()[1]/2)
+    if win.pygame_window != None:
+        text.x = (win.pygame_window.get_width()/2)-(text.get_size()[0]/2)
+        text.y = (win.pygame_window.get_height()/2)-(text.get_size()[1]/2)
 
 # Perform with delay: 10 millis; function: update; repeats: 0
 perform_with_delay(10, update, 0)
