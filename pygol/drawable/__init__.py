@@ -135,13 +135,21 @@ class Text(Drawable):
         self.font = pygame.font.SysFont(fontname, size)
         self.label = self.font.render(self.text, False, self.color)
         self.visible = True
+        self.click_listener = None
+    
+    def clicked(self, canvas: pygame.Surface, phase: str, pos, event):
+        if self.label.get_rect().collidepoint(pos) and self.visible:
+            if self.click_listener is not None: self.click_listener(phase, canvas, self, event)
+    
+    def set_click_listener(self, listener):
+        self.click_listener = listener
     
     def get_size(self) -> int:
         return self.font.size(self.text)
 
     def set_text(self, text: str):
         self.text = text
-        self.label = self.font.render(self.text, False, self.color)
+        self.label = self.font.render(self.text, True, self.color)
     
     def on_draw(self, canvas: pygame.Surface):
         if self.visible:
