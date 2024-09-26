@@ -77,7 +77,7 @@ class Window:
     def _internal_main(self):
         pygame.init()
         self.pygame_window = pygame.display.set_mode((self.width, self.height), pygame.RESIZABLE | pygame.DOUBLEBUF)
-        pygame.display.set_icon(pygame.image.load(f'{os.path.dirname(__file__)}/logo.png'))
+        pygame.display.set_icon(pygame.image.load(f'{self.icon}'))
         pygame.event.set_allowed([pygame.QUIT, pygame.KEYDOWN, pygame.KEYUP, pygame.MOUSEBUTTONDOWN, pygame.MOUSEBUTTONUP])
         pygame.display.set_caption(self.title)
         pygame.mixer.init(frequency=16000)

@@ -1,7 +1,7 @@
 import pygame
 from pygol import ui
 import warnings
-import copy, math
+import copy, math, os
 
 class Drawable:
     width = None
@@ -138,9 +138,15 @@ class Text(Drawable):
         self.click_listener = None
     
     def clicked(self, canvas: pygame.Surface, phase: str, pos, event):
-        if self.label.get_rect().collidepoint(pos) and self.visible:
+        if self.label.get_rect(topleft=(self.x, self.y)).collidepoint(pos) and self.visible:
             if self.click_listener is not None: self.click_listener(phase, canvas, self, event)
     
+    def set_file_font(self, path: str, size: int):
+        if os.path.exists(path):
+            self.font = pygame.font.Font(path, size)
+        else:
+            raise OSError(f'Path {path} does not exist!')
+
     def set_click_listener(self, listener):
         self.click_listener = listener
     
