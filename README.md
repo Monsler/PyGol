@@ -6,8 +6,6 @@ How to install?
 ```
 pip install pygol-engine
 ```
-
-<br>
 <img src="https://i.ibb.co/HDs3gLB/1.png"><br>
 Hello World Example:
 
