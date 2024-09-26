@@ -1,7 +1,7 @@
 # PyGol
 PyGol is a pure python library which is based on pygame and simplifies its functions.
 Heavily inspired by Solar2D<br>
-How to install?
+# How to install?
 
 ```
 pip install pygol-engine
