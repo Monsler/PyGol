@@ -1,0 +1,10 @@
+README.md
+setup.py
+pygol/audio/__init__.py
+pygol/drawable/__init__.py
+pygol/routine/__init__.py
+pygol/ui/__init__.py
+pygol_engine.egg-info/PKG-INFO
+pygol_engine.egg-info/SOURCES.txt
+pygol_engine.egg-info/dependency_links.txt
+pygol_engine.egg-info/top_level.txt
